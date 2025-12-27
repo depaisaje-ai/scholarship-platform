@@ -107,7 +107,7 @@ function ProfileStep({ step, onNext, onBack }: { step: number; onNext: () => voi
 
     const updateAcademicEntry = (index: number, field: keyof AcademicBackground, value: string | number) => {
         const updated = [...academicBackground];
-        (updated[index] as Record<string, string | number | undefined>)[field] = value;
+        updated[index] = { ...updated[index], [field]: value };
         setAcademicBackground(updated);
     };
 
@@ -117,7 +117,7 @@ function ProfileStep({ step, onNext, onBack }: { step: number; onNext: () => voi
 
     const updateExperience = (index: number, field: keyof ProfessionalExperience, value: string | number) => {
         const updated = [...professionalExperience];
-        (updated[index] as Record<string, string | number | undefined>)[field] = value;
+        updated[index] = { ...updated[index], [field]: value };
         setProfessionalExperience(updated);
     };
 
@@ -127,7 +127,7 @@ function ProfileStep({ step, onNext, onBack }: { step: number; onNext: () => voi
 
     const updateLanguage = (index: number, field: keyof Language, value: string) => {
         const updated = [...languages];
-        (updated[index] as Record<string, string>)[field] = value;
+        updated[index] = { ...updated[index], [field]: value };
         setLanguages(updated);
     };
 
@@ -518,8 +518,8 @@ function ProfileStep({ step, onNext, onBack }: { step: number; onNext: () => voi
                                         key={level}
                                         onClick={() => setDesiredLevel(level)}
                                         className={`p-3 rounded-xl border transition-all ${desiredLevel === level
-                                                ? 'bg-primary-500/20 border-primary-500 text-white'
-                                                : 'border-dark-600 text-dark-300 hover:border-dark-500'
+                                            ? 'bg-primary-500/20 border-primary-500 text-white'
+                                            : 'border-dark-600 text-dark-300 hover:border-dark-500'
                                             }`}
                                     >
                                         {level}
@@ -539,8 +539,8 @@ function ProfileStep({ step, onNext, onBack }: { step: number; onNext: () => voi
                                         key={field}
                                         onClick={() => toggleField(field)}
                                         className={`px-3 py-1.5 rounded-full text-sm transition-all ${selectedFields.includes(field)
-                                                ? 'bg-primary-500 text-white'
-                                                : 'bg-dark-700 text-dark-300 hover:bg-dark-600'
+                                            ? 'bg-primary-500 text-white'
+                                            : 'bg-dark-700 text-dark-300 hover:bg-dark-600'
                                             }`}
                                     >
                                         {selectedFields.includes(field) && <CheckCircle className="w-3 h-3 inline mr-1" />}
@@ -627,8 +627,8 @@ function ProfileStep({ step, onNext, onBack }: { step: number; onNext: () => voi
                     onClick={onBack}
                     disabled={step === 1}
                     className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all ${step === 1
-                            ? 'text-dark-500 cursor-not-allowed'
-                            : 'text-white hover:bg-dark-700'
+                        ? 'text-dark-500 cursor-not-allowed'
+                        : 'text-white hover:bg-dark-700'
                         }`}
                 >
                     <ArrowLeft className="w-5 h-5" /> Back
@@ -638,8 +638,8 @@ function ProfileStep({ step, onNext, onBack }: { step: number; onNext: () => voi
                     onClick={handleNext}
                     disabled={!isStepValid()}
                     className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${isStepValid()
-                            ? 'btn-primary'
-                            : 'bg-dark-700 text-dark-500 cursor-not-allowed'
+                        ? 'btn-primary'
+                        : 'bg-dark-700 text-dark-500 cursor-not-allowed'
                         }`}
                 >
                     {step === 5 ? 'Continue to Preferences' : 'Next'} <ArrowRight className="w-5 h-5" />
